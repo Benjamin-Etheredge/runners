@@ -5,6 +5,5 @@ services:
         - RUNNER_IDLE_TIMEOUT=0
         - RUNNER_LABELS=cml,gpu
         - RUNNER_REPO=https://github.com/Benjamin-Etheredge/pokegen
-        #- repo_token=ACEVXVLJXYAMIZWGKREPLZ3AZ767Q
         - repo_token=${repo_token}
     image: dvcorg/cml-py3:latest
