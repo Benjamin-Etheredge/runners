@@ -26,6 +26,6 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: deploy
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN}}
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: bash scripts/all_up.sh
