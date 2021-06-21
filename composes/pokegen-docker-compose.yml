@@ -1,9 +1,10 @@
 version: "3.3"
 services:
   pokegen_runner:
+    image: dvcorg/cml-py3:latest
     environment: 
         - RUNNER_IDLE_TIMEOUT=0
         - RUNNER_LABELS=cml,gpu
         - RUNNER_REPO=https://github.com/Benjamin-Etheredge/pokegen
         - repo_token=${repo_token}
-    image: dvcorg/cml-py3:latest
+    runtime: nvidia
