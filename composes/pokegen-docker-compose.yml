@@ -6,5 +6,5 @@ services:
         - RUNNER_IDLE_TIMEOUT=0
         - RUNNER_LABELS=cml,gpu
         - RUNNER_REPO=https://github.com/Benjamin-Etheredge/pokegen
-        - repo_token=${repo_token}
+    shm_size: '24gb' # This fixes an issue with pytorch dataloaders
     runtime: nvidia
