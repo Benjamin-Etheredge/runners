@@ -1,6 +1,7 @@
 version: "3.3"
+# TODO make feature request to cml docker container to take multiple repos
 services:
-  pokegen_runner:
+  pokegen_runner_small:
     image: dvcorg/cml-py3:latest
     environment: 
         - RUNNER_IDLE_TIMEOUT=0
@@ -8,4 +9,43 @@ services:
         - RUNNER_REPO=https://github.com/Benjamin-Etheredge/pokegen
         - repo_token=${REPO_TOKEN}
     shm_size: '24gb' # This fixes an issue with pytorch dataloaders
-    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ['0']
+            capabilities: [gpu]
+
+
+  pokegen_runner_big:
+    image: dvcorg/cml-py3:latest
+    environment: 
+        - RUNNER_IDLE_TIMEOUT=0
+        - RUNNER_LABELS=cml,gpu,big
+        - RUNNER_REPO=https://github.com/Benjamin-Etheredge/pokegen
+        - repo_token=${REPO_TOKEN}
+    shm_size: '24gb' # This fixes an issue with pytorch dataloaders
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ['1']
+            capabilities: [gpu]
+
+
+  pokegen_runner_all:
+    image: dvcorg/cml-py3:latest
+    environment: 
+        - RUNNER_IDLE_TIMEOUT=0
+        - RUNNER_LABELS=cml,gpus
+        - RUNNER_REPO=https://github.com/Benjamin-Etheredge/pokegen
+        - repo_token=${REPO_TOKEN}
+    shm_size: '24gb' # This fixes an issue with pytorch dataloaders
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            capabilities: [gpu]
